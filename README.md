@@ -4,7 +4,7 @@ A minimal Astro blog theme. Light and dark. One column, one accent.
 
 [简体中文](README.zh-CN.md)
 
-Demo this repo, or use it as a GitHub template.
+Use this repository as a GitHub template, or add it as a dependency and keep your own `lonefox.config.ts` at the site root.
 
 ## Features
 

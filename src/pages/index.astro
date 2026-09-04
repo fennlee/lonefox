@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import FoxMark from '../components/FoxMark.astro';
 import PawTrail from '../components/PawTrail.astro';
 import { getCollection } from 'astro:content';
-import { site, home } from '../../lonefox.config';
+import { site, home } from 'lonefox/config';
 
 const posts = (await getCollection('blog'))
   .filter((p) => !p.data.draft)

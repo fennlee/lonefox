@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PawTrail from '../../components/PawTrail.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
-import { archive, withAccent } from '../../../lonefox.config';
+import { archive, withAccent } from 'lonefox/config';
 
 const kindOf = (p: CollectionEntry<'blog'>) =>
   p.data.category === 'tech' ? 'tech' : p.data.category === 'travel' ? 'travel' : 'notes';

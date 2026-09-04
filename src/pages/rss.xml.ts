@@ -1,6 +1,6 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
-import { site } from '../../lonefox.config';
+import { site } from 'lonefox/config';
 
 export const prerender = true;
 

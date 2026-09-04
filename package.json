@@ -7,11 +7,18 @@
   "engines": {
     "node": ">=22"
   },
+  "exports": {
+    ".": "./src/integration.ts",
+    "./src": "./src/integration.ts"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check"
+  },
+  "peerDependencies": {
+    "astro": "^5.0.0 || ^7.0.0"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",

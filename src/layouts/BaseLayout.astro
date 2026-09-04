@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import SleepingFox from '../components/SleepingFox.astro';
 import { ClientRouter } from 'astro:transitions';
-import { site, nav } from '../../lonefox.config';
+import { site, nav } from 'lonefox/config';
 
 const path = Astro.url.pathname;
 const title = Astro.props.title ? `${Astro.props.title} · ${site.name}` : `${site.name} — ${site.motto}`;

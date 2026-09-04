@@ -4,7 +4,7 @@
 
 [English](README.md)
 
-可直接当 GitHub 模板使用。
+可直接当 GitHub 模板使用，或作为依赖，在站点根目录放自己的 `lonefox.config.ts`。
 
 ## 特性
 

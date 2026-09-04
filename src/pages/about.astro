@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site, about, withAccent } from '../../lonefox.config';
+import { site, about, withAccent } from 'lonefox/config';
 const h = withAccent(about.headline, about.accent);
 ---
 <BaseLayout title="About" description={about.lede}>
