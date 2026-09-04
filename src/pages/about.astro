@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site, about } from '../../lonefox.config';
+---
+<BaseLayout title="About" description={about.lede}>
+  <article class="article">
+    <span class="article-meta">{about.meta}</span>
+    <h1 class="arch-headline">{about.headline}</h1>
+    <p class="lede">{about.lede}</p>
+    <hr class="ledge-divider" />
+    <div class="prose">
+      <blockquote>{about.quote}</blockquote>
+    </div>
+    <div class="links">
+      {site.github && <a href={site.github}>github</a>}
+      {site.email && <a href={`mailto:${site.email}`}>email</a>}
+      <a href="/rss.xml">rss</a>
+      <a href="/archive/">the study →</a>
+    </div>
+  </article>
+</BaseLayout>
