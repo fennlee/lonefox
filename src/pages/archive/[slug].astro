@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+const all = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({ params: { slug: post.id.replace(/\.md$/, '') }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const format = (d: Date) => d.toLocaleDateString('en-CA').replaceAll('-', '.');
+const i = all.findIndex((p) => p.id === post.id);
+const newer = i > 0 ? all[i - 1] : null;
+const older = i < all.length - 1 ? all[i + 1] : null;
+const href = (p: typeof newer) => (p ? `/archive/${p.id.replace(/\.md$/, '')}/` : null);
+const kind = post.data.category === 'tech' ? 'technical note' : post.data.category === 'travel' ? 'travel' : 'note';
+---
+<BaseLayout title={post.data.title} description={post.data.description} type="article">
+  <article class="article">
+    <header>
+      <a class="back-archive" href="/archive/">← the study</a>
+      <span class="article-meta">{kind} / {format(post.data.date)}{post.data.location ? ` · ${post.data.location}` : ''}</span>
+      <h1 class="article-title">{post.data.title}</h1>
+      {post.data.description && <p class="lede">{post.data.description}</p>}
+    </header>
+    <hr class="ledge-divider" />
+    <div class="prose"><Content /></div>
+    <div class="post-nav">
+      <div class="post-nav-adj">
+        {older && <a href={href(older)}><small>older</small>← {older.data.title}</a>}
+        {newer && <a href={href(newer)}><small>newer</small>{newer.data.title} →</a>}
+      </div>
+      <a class="post-nav-ledger" href="/archive/"><small>the study</small>browse the shelves →</a>
+    </div>
+  </article>
+</BaseLayout>

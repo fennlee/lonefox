@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FoxMark from '../components/FoxMark.astro';
+import PawTrail from '../components/PawTrail.astro';
+import { getCollection } from 'astro:content';
+import { site, home } from '../../lonefox.config';
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const recent = posts.slice(0, 2);
+const format = (d: Date) => d.toLocaleDateString('en-CA').replaceAll('-', '.');
+---
+<BaseLayout>
+  <div class="den">
+    <p class="door-note">{home.door}</p>
+    <section class="hearth">
+      <h1 class="title-row">
+        <FoxMark size={30} />
+        <span class="title">{site.wordmark}</span>
+      </h1>
+      <div class="layout">
+        <aside class="profile">
+          <div class="avatar-frame">portrait</div>
+          <div class="identity">
+            {home.identity.rows.map((r) => (
+              <div class="idrow"><span class="idmark">{r.mark}</span><span>{r.text}</span></div>
+            ))}
+            <div class="id-note">{home.identity.note}</div>
+          </div>
+        </aside>
+        <div class="content">
+          <div class="copy">
+            <p>{home.hearth.motto}</p>
+            <p class="soft">{home.hearth.soft}</p>
+            <p class="stamp">{home.hearth.stamp}<span>{new Date().getFullYear()}</span></p>
+          </div>
+          <div class="moetags">
+            <span class="moetags-lab">{home.themes.label}</span>
+            {home.themes.tags.map((it) => (
+              <span class="moetag" data-tone={it.tone}><span class="ico">{it.ico}</span>{it.name}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="rules">
+      <div class="rule-col">
+        <h3>{home.shelf.label} <span class="dot">·</span><span class="rule-hint">{home.shelf.hint}</span></h3>
+        <ul class="rlist">
+          {home.shelf.items.map((item) => <li><span class="li-mark">{item.mark}</span>{item.text}</li>)}
+        </ul>
+      </div>
+      <div class="rule-col">
+        <h3>{home.corner.label} <span class="dot">·</span><span class="rule-hint">{home.corner.hint}</span></h3>
+        <ul class="rlist">
+          {home.corner.items.map((item) => <li><span class="li-mark">{item.mark}</span>{item.text}</li>)}
+        </ul>
+        <p class="col-note">{home.corner.note}</p>
+      </div>
+    </section>
+    {home.rooms.bots.length > 0 && (
+      <section class="bots">
+        <span class="bots-lab">{home.rooms.label}</span>
+        {home.rooms.bots.map((b) => (
+          <span class="bot"><span class="bot-dot"></span>{b.name} <em>— {b.status}</em></span>
+        ))}
+      </section>
+    )}
+    {recent.length > 0 && (
+      <section class="newest">
+        <span class="place-lab">{home.table.label} <span class="dot">·</span> {home.table.hint}</span>
+        {recent.map((p) => (
+          <a class="new-row" href={`/archive/${p.id.replace(/\.md$/, '')}/`}>
+            <span class="new-dot">✦</span>
+            <span class="new-date">{format(p.data.date)}</span>
+            <span class="new-ttl">{p.data.title} →</span>
+          </a>
+        ))}
+      </section>
+    )}
+    <PawTrail />
+    <a class="study-door" href="/archive/">
+      <span class="door" aria-hidden="true"><span class="door-crack"></span><span class="door-handle"></span></span>
+      <span class="study-text">
+        <span class="study-name">{home.study.label}</span>
+        <span class="study-note">{home.study.note}</span>
+      </span>
+      <span class="study-go">→</span>
+    </a>
+  </div>
+</BaseLayout>

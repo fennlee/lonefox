@@ -1,0 +1,90 @@
+---
+import '../styles/global.css';
+import SleepingFox from '../components/SleepingFox.astro';
+import { site, nav } from '../../lonefox.config';
+
+const path = Astro.url.pathname;
+const title = Astro.props.title ? `${Astro.props.title} · ${site.name}` : `${site.name} — ${site.motto}`;
+const desc = Astro.props.description || site.description;
+const url = `${site.url}${path === '/' ? '/' : path.replace(/\/$/, '')}`;
+---
+<!doctype html>
+<html lang={site.lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={desc} />
+    <link rel="icon" href="/favicon.svg" />
+    <title>{title}</title>
+    <link rel="canonical" href={url} />
+    <script is:inline>
+      (function () {
+        try {
+          var t = localStorage.getItem('lonefox-theme');
+          if (t !== 'light' && t !== 'dark') {
+            t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        } catch (e) {}
+      })();
+    </script>
+    <meta property="og:type" content={Astro.props.type || 'website'} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:url" content={url} />
+    <link rel="alternate" type="application/rss+xml" title={site.name} href="/rss.xml" />
+  </head>
+  <body>
+    <div class="fireflies" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+    <a class="skip-link" href="#main">skip to content</a>
+    <div class="col">
+      <nav class="topnav" aria-label="Primary">
+        {nav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={
+              item.href === '/'
+                ? path === '/' ? 'page' : undefined
+                : path.startsWith(item.href.replace(/\/$/, '')) ? 'page' : undefined
+            }
+          >{item.label}</a>
+        ))}
+        <button class="theme-toggle" type="button" aria-label="toggle theme" title="toggle theme">
+          <span class="theme-ico" aria-hidden="true"></span>
+        </button>
+      </nav>
+      <div class="page-rule"></div>
+      <main id="main">
+        <slot />
+      </main>
+      <footer class="site-foot">
+        <span>{new Date().getFullYear()} · <a href="/">{site.name}</a> — {site.motto}</span>
+        <span class="sleeping-fox" title="asleep">
+          <SleepingFox />
+          <span class="zzz">z</span>
+        </span>
+      </footer>
+    </div>
+    <script is:inline>
+      (function () {
+        var btn = document.querySelector('.theme-toggle');
+        if (!btn) return;
+        var ico = btn.querySelector('.theme-ico');
+        function paint() {
+          var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+          ico.textContent = dark ? '☀' : '☾';
+          btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+        }
+        btn.addEventListener('click', function () {
+          var dark = document.documentElement.getAttribute('data-theme') !== 'dark';
+          if (dark) document.documentElement.setAttribute('data-theme', 'dark');
+          else document.documentElement.removeAttribute('data-theme');
+          try { localStorage.setItem('lonefox-theme', dark ? 'dark' : 'light'); } catch (e) {}
+          paint();
+        });
+        paint();
+      })();
+    </script>
+  </body>
+</html>
