@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "A restrained Astro webhome theme. White paper, one ember.",
+  "description": "A minimal Astro blog theme.",
   "engines": {
     "node": ">=22"
   },

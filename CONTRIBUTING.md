@@ -27,6 +27,4 @@ Types: `feat` `fix` `refactor` `docs` `test` `ci` `build` `chore` `perf` `revert
 - `CHANGELOG.md` `[Unreleased]` updated
 - No secrets in the diff
 
-## Visual
-
-Keep the rooms. Keep the paper white. Ember is the only loud color. See `DESIGN.md`.
+See `DESIGN.md` for the visual tokens.

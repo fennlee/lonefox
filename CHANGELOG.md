@@ -4,6 +4,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versioning: [S
 
 ## [Unreleased]
 
+### Changed
+
+- README (en + zh): describe lonefox as an Astro blog theme.
+
 ### Added
 
-- Initial lonefox Astro webhome theme.
+- Initial lonefox Astro blog theme.

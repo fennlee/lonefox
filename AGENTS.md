@@ -12,7 +12,7 @@ Binding for agents in this repository.
 
 - Smallest coherent change.
 - Identity belongs in `lonefox.config.ts`. Tokens belong in `src/styles/global.css`.
-- Do not rearrange rooms, post-nav, or archive shelves.
+- Keep layout and tokens unless the task is to change them.
 - Do not add Tailwind, React, a theme marketplace, or a second accent color.
 
 ## Before commit

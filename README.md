@@ -1,65 +1,67 @@
 # lonefox
 
-A personal webhome for Astro. White paper, one ember. Not a blog theme.
+A minimal Astro blog theme. Light and dark. One column, one accent.
 
 [简体中文](README.zh-CN.md)
 
-## What it is
+Demo this repo, or use it as a GitHub template.
 
-One column. Day is `#FFFFFF`. Night is a second room. Ember is the only loud color.
+## Features
 
-Fork it. Change `lonefox.config.ts`. Put notes in `src/content/blog/`. Do not rearrange the rooms.
+- Markdown posts (`src/content/blog/`)
+- Home, archive, about, 404, RSS, sitemap
+- Light / dark mode
+- One config file: `lonefox.config.ts`
 
 ## Quick start
 
 ```bash
+git clone https://github.com/1907/lonefox.git
+cd lonefox
 npm install
-npm run dev -- --host
-npm run build
+npm run dev
 ```
 
 Node 22+.
 
-Use this repository as a GitHub template, or:
+## Project structure
 
-```bash
-git clone https://github.com/1907/lonefox.git
-cd lonefox
+```text
+/
+├── lonefox.config.ts     # site, home, about, archive
+├── src/
+│   ├── content/blog/     # posts
+│   ├── pages/
+│   ├── layouts/
+│   ├── components/
+│   └── styles/global.css # colors
+└── public/
 ```
 
-## Configure
+Posts use `title`, `date`, `description`, `category` (`tech` | `notes` | `travel`), optional `location`.
 
-All identity lives in [`lonefox.config.ts`](lonefox.config.ts):
+## Configuration
 
-- `site` — name, motto, url, email, github
-- `home` — the rooms on `/`
-- `about` — `/about/`
-- `archive` — shelf labels
+Edit [`lonefox.config.ts`](lonefox.config.ts):
 
-Tokens live in `src/styles/global.css` (`:root` and `[data-theme="dark"]`). Change hex values. Do not add a second accent.
-
-Replace `public/favicon.svg`. Add a portrait if you want one; the frame is a placeholder.
-
-## Rooms
-
-| Route | |
+| Key | |
 |---|---|
-| `/` | the den |
-| `/archive/` | three shelves: tech / notes / travel |
-| `/about/` | who keeps going |
-| 404 | trail gone cold |
+| `site` | name, motto, url, email, github |
+| `home` | home copy |
+| `about` | about page |
+| `archive` | archive labels |
 
-Post-nav (older / newer, study exit) is final.
+Colors: `src/styles/global.css`.
 
-## Development
+## Commands
 
-```bash
-npm run check
-npm run build
-```
-
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+| Command | |
+|---|---|
+| `npm run dev` | local server |
+| `npm run build` | production build |
+| `npm run check` | type check |
+| `npm run preview` | preview `dist/` |
 
 ## License
 
-[MIT](LICENSE). Copyright (c) 2026 1907.
+[MIT](LICENSE)
