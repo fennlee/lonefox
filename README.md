@@ -46,7 +46,7 @@ Edit [`lonefox.config.ts`](lonefox.config.ts):
 
 | Key | |
 |---|---|
-| `site` | name, motto, url, email, github |
+| `site` | name, motto, url, email, github, favicon |
 | `nav` | primary links |
 | `home` | home copy |
 | `about` | about page |

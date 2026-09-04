@@ -12,6 +12,7 @@ const image = Astro.props.image && String(Astro.props.image).startsWith('http')
   ? Astro.props.image
   : `${site.url}${Astro.props.image || site.ogImage || '/images/share.png'}`;
 const type = Astro.props.type || 'website';
+const favicon = site.favicon || '/favicon.svg';
 const themeKey = site.themeKey || 'lonefox-theme';
 const rssTitle = site.rssTitle || `${site.name} — ${site.motto}`;
 ---
@@ -21,7 +22,7 @@ const rssTitle = site.rssTitle || `${site.name} — ${site.motto}`;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={desc} />
-    <link rel="icon" href="/favicon.svg" />
+    <link rel="icon" href={favicon} />
     <ClientRouter />
     <title>{title}</title>
     <link rel="canonical" href={url} />

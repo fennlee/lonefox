@@ -14,6 +14,7 @@ declare module 'lonefox/config' {
     email: string;
     github: string;
     ogImage: string;
+    favicon: string;
     themeKey: string;
     rssTitle: string;
   };

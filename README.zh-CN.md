@@ -46,7 +46,7 @@ npm run dev
 
 | 字段 | |
 |---|---|
-| `site` | 站名、简介、域名、邮箱、github |
+| `site` | 站名、简介、域名、邮箱、github、favicon |
 | `nav` | 导航 |
 | `home` | 首页文案 |
 | `about` | 关于页 |

@@ -15,6 +15,7 @@ export const site = {
   email: 'you@example.com',
   github: 'https://github.com/1907/lonefox',
   ogImage: '/images/share.png',
+  favicon: '/favicon.svg',
   themeKey: 'lonefox-theme',
   rssTitle: '',
 };
