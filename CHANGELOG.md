@@ -8,6 +8,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versioning: [S
 
 - README (en + zh): describe lonefox as an Astro blog theme.
 
+### Fixed
+
+- `lonefoxSrc()` returns a path string for the consuming site's `srcDir`; the integration maps `lonefox/config` to the site-root config file.
+
 ### Added
 
 - `lonefox` Astro integration: `lonefox/config` reads `lonefox.config.ts` from the site root, so another repo can depend on this theme.
