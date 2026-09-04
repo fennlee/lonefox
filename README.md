@@ -9,7 +9,7 @@ Demo this repo, or use it as a GitHub template.
 ## Features
 
 - Markdown posts (`src/content/blog/`)
-- Home, archive, about, 404, RSS, sitemap
+- Home, archive, about, domains, 404, RSS, sitemap
 - Light / dark mode
 - One config file: `lonefox.config.ts`
 
@@ -38,7 +38,7 @@ Node 22+.
 └── public/
 ```
 
-Posts use `title`, `date`, `description`, `category` (`tech` | `notes` | `travel`), optional `location`.
+Posts use `title`, `date`, `description`, `category` (`tech` | `notes` | `travel` | `poem`), optional `location`, `cover`, `images`.
 
 ## Configuration
 
@@ -47,9 +47,11 @@ Edit [`lonefox.config.ts`](lonefox.config.ts):
 | Key | |
 |---|---|
 | `site` | name, motto, url, email, github |
+| `nav` | primary links |
 | `home` | home copy |
 | `about` | about page |
 | `archive` | archive labels |
+| `domains` | optional trade list (empty = unused) |
 
 Colors: `src/styles/global.css`.
 

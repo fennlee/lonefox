@@ -7,10 +7,14 @@ const blog = defineCollection({
     title: z.string(),
     date: z.coerce.date(),
     description: z.string().optional().default(''),
-    category: z.enum(['tech', 'notes', 'travel']).optional().default('notes'),
+    category: z.string().optional().default('note'),
+    badge: z.string().optional(),
     tags: z.array(z.string()).optional().default([]),
     draft: z.boolean().optional().default(false),
+    slug: z.string().optional(),
     location: z.string().optional().default(''),
+    cover: z.string().optional().default(''),
+    images: z.array(z.string()).optional().default([]),
   }),
 });
 

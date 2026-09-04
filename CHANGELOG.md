@@ -10,4 +10,6 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versioning: [S
 
 ### Added
 
+- Domains page, poem/travel posts, portraits, and the live visual CSS so a site can match mygo.top.
+
 - Initial lonefox Astro blog theme.

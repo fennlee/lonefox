@@ -1,12 +1,19 @@
 ---
 import '../styles/global.css';
 import SleepingFox from '../components/SleepingFox.astro';
+import { ClientRouter } from 'astro:transitions';
 import { site, nav } from '../../lonefox.config';
 
 const path = Astro.url.pathname;
 const title = Astro.props.title ? `${Astro.props.title} · ${site.name}` : `${site.name} — ${site.motto}`;
 const desc = Astro.props.description || site.description;
 const url = `${site.url}${path === '/' ? '/' : path.replace(/\/$/, '')}`;
+const image = Astro.props.image && String(Astro.props.image).startsWith('http')
+  ? Astro.props.image
+  : `${site.url}${Astro.props.image || site.ogImage || '/images/share.png'}`;
+const type = Astro.props.type || 'website';
+const themeKey = site.themeKey || 'lonefox-theme';
+const rssTitle = site.rssTitle || `${site.name} — ${site.motto}`;
 ---
 <!doctype html>
 <html lang={site.lang}>
@@ -15,12 +22,13 @@ const url = `${site.url}${path === '/' ? '/' : path.replace(/\/$/, '')}`;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={desc} />
     <link rel="icon" href="/favicon.svg" />
+    <ClientRouter />
     <title>{title}</title>
     <link rel="canonical" href={url} />
-    <script is:inline>
+    <script is:inline define:vars={{ themeKey }} data-astro-rerun>
       (function () {
         try {
-          var t = localStorage.getItem('lonefox-theme');
+          var t = localStorage.getItem(themeKey);
           if (t !== 'light' && t !== 'dark') {
             t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
           }
@@ -28,15 +36,22 @@ const url = `${site.url}${path === '/' ? '/' : path.replace(/\/$/, '')}`;
         } catch (e) {}
       })();
     </script>
-    <meta property="og:type" content={Astro.props.type || 'website'} />
+    <meta property="og:type" content={type} />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={desc} />
     <meta property="og:url" content={url} />
-    <link rel="alternate" type="application/rss+xml" title={site.name} href="/rss.xml" />
+    <meta property="og:image" content={image} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={desc} />
+    <meta name="twitter:image" content={image} />
+    <link rel="alternate" type="application/rss+xml" title={rssTitle} href="/rss.xml" />
   </head>
   <body>
-    <div class="fireflies" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+    <div class="fireflies" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
     <a class="skip-link" href="#main">skip to content</a>
     <div class="col">
       <nav class="topnav" aria-label="Primary">
@@ -46,7 +61,7 @@ const url = `${site.url}${path === '/' ? '/' : path.replace(/\/$/, '')}`;
             aria-current={
               item.href === '/'
                 ? path === '/' ? 'page' : undefined
-                : path.startsWith(item.href.replace(/\/$/, '')) ? 'page' : undefined
+                : item.href !== '/rss.xml' && path.startsWith(item.href.replace(/\/$/, '')) ? 'page' : undefined
             }
           >{item.label}</a>
         ))}
@@ -66,7 +81,7 @@ const url = `${site.url}${path === '/' ? '/' : path.replace(/\/$/, '')}`;
         </span>
       </footer>
     </div>
-    <script is:inline>
+    <script is:inline define:vars={{ themeKey }} data-astro-rerun>
       (function () {
         var btn = document.querySelector('.theme-toggle');
         if (!btn) return;
@@ -77,10 +92,11 @@ const url = `${site.url}${path === '/' ? '/' : path.replace(/\/$/, '')}`;
           btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
         }
         btn.addEventListener('click', function () {
-          var dark = document.documentElement.getAttribute('data-theme') !== 'dark';
+          var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+          dark = !dark;
           if (dark) document.documentElement.setAttribute('data-theme', 'dark');
           else document.documentElement.removeAttribute('data-theme');
-          try { localStorage.setItem('lonefox-theme', dark ? 'dark' : 'light'); } catch (e) {}
+          try { localStorage.setItem(themeKey, dark ? 'dark' : 'light'); } catch (e) {}
           paint();
         });
         paint();

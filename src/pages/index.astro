@@ -21,7 +21,11 @@ const format = (d: Date) => d.toLocaleDateString('en-CA').replaceAll('-', '.');
       </h1>
       <div class="layout">
         <aside class="profile">
-          <div class="avatar-frame">portrait</div>
+          <div class="avatar-frame">
+            {home.portrait.src
+              ? <img src={home.portrait.src} alt={home.portrait.alt || ''} />
+              : <span>portrait</span>}
+          </div>
           <div class="identity">
             {home.identity.rows.map((r) => (
               <div class="idrow"><span class="idmark">{r.mark}</span><span>{r.text}</span></div>
@@ -37,8 +41,10 @@ const format = (d: Date) => d.toLocaleDateString('en-CA').replaceAll('-', '.');
           </div>
           <div class="moetags">
             <span class="moetags-lab">{home.themes.label}</span>
-            {home.themes.tags.map((it) => (
-              <span class="moetag" data-tone={it.tone}><span class="ico">{it.ico}</span>{it.name}</span>
+            {home.themes.tags.map((it, i) => (
+              <span class="moetag" data-tone={it.tone} data-slip={i % 3 === 0 ? 'up' : i % 3 === 1 ? 'down' : 'flat'}>
+                <span class="ico">{it.ico}</span>{it.name}
+              </span>
             ))}
           </div>
         </div>
@@ -70,11 +76,12 @@ const format = (d: Date) => d.toLocaleDateString('en-CA').replaceAll('-', '.');
     {recent.length > 0 && (
       <section class="newest">
         <span class="place-lab">{home.table.label} <span class="dot">·</span> {home.table.hint}</span>
-        {recent.map((p) => (
+        {recent.map((p, i) => (
           <a class="new-row" href={`/archive/${p.id.replace(/\.md$/, '')}/`}>
             <span class="new-dot">✦</span>
+            <span class="new-lab">{i === 0 ? 'latest' : 'earlier'}</span>
             <span class="new-date">{format(p.data.date)}</span>
-            <span class="new-ttl">{p.data.title} →</span>
+            <span class="new-ttl">{p.data.title}<span class="new-go"> →</span></span>
           </a>
         ))}
       </section>

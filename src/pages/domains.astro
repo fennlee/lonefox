@@ -1,0 +1,241 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { domains as trade, withAccent } from '../../lonefox.config';
+
+const list = trade.forTrade;
+const sold = trade.sold;
+const contact = trade.contact;
+const price = (n: number) => `$${n.toLocaleString('en-US')}+`;
+const h = withAccent(trade.headline, trade.accent);
+---
+
+<BaseLayout title="the trade" description={trade.lede}>
+  <div class="article arch-head">
+    <span class="article-meta">{trade.meta}</span>
+    <h1 class="arch-headline">{h.before}<span style="color: var(--ember)">{h.accent}</span>{h.after}</h1>
+    <p class="lede">{trade.lede}</p>
+    {contact && (
+      <p class="dom-contact">
+        talk to me — <a href={`mailto:${contact}`}>{contact}</a>
+      </p>
+    )}
+
+    <hr class="ledge-divider" />
+
+    {list.length > 0 && (
+    <section class="dom-reg">
+      <h2 class="reg-title">
+        for trade <span class="dot">·</span><span class="reg-hint">open at $100+ each</span>
+        <span class="reg-count">{list.length} names</span>
+      </h2>
+      <ul class="reg-list dom-list">
+        {list.map((x) => (
+          <li>
+            <a class="dom-row" href={`https://${x.d}/`} rel="noopener">
+              <span class="dom-mark" aria-hidden="true">✦</span>
+              <span class="dom-name">{x.d}</span>
+              <span class="dom-note">{x.note}</span>
+              <span class="dom-go" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+    )}
+
+    {sold.length > 0 && (
+    <details class="dom-sold">
+      <summary>
+        <span class="s-dot" aria-hidden="true">✦</span>
+        <span class="s-lab">previously sold</span>
+        <span class="s-note">what already found homes — {sold.length} names</span>
+        <span class="s-chev" aria-hidden="true"></span>
+      </summary>
+      <ul class="reg-list dom-list" id="sold-list">
+        {sold.map((x) => (
+          <li>
+            <div class="dom-row">
+              <span class="dom-mark is-done" aria-hidden="true">·</span>
+              <span class="dom-name">{x.d}</span>
+              {x.note ? <span class="dom-note">{x.note}</span> : <span class="dom-note is-ph">sold</span>}
+              {x.p ? <span class="dom-price">{price(x.p)}</span> : x.note ? <span class="dom-price is-blank">sold</span> : null}
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div class="s-pager" id="sold-pager" hidden>
+        <button type="button" data-sold-prev aria-label="previous page" disabled>‹</button>
+        <span class="s-pcount" id="sold-pcount"></span>
+        <button type="button" data-sold-next aria-label="next page">›</button>
+      </div>
+    </details>
+    )}
+  </div>
+  {sold.length > 0 && (
+  <script is:inline>
+    /* mobile-only sold pagination — SSR renders all; JS pages it 4-per on ≤640px */
+    (function () {
+      var PER = 4, page = 0;
+      var list = document.getElementById('sold-list');
+      var pager = document.getElementById('sold-pager');
+      if (!list || !pager) return;
+      var prev = pager.querySelector('[data-sold-prev]');
+      var next = pager.querySelector('[data-sold-next]');
+      var count = document.getElementById('sold-pcount');
+      var items = Array.prototype.slice.call(list.children);
+      var mq = window.matchMedia('(max-width: 640px)');
+      function render() {
+        if (!mq.matches) {
+          pager.hidden = true;
+          items.forEach(function (el) { el.hidden = false; });
+          return;
+        }
+        pager.hidden = false;
+        var pages = Math.max(1, Math.ceil(items.length / PER));
+        page = Math.min(page, pages - 1);
+        var start = page * PER;
+        items.forEach(function (el, i) { el.hidden = i < start || i >= start + PER; });
+        count.textContent = (page + 1) + ' / ' + pages;
+        prev.disabled = page <= 0;
+        next.disabled = page >= pages - 1;
+      }
+      prev.addEventListener('click', function () { page--; render(); });
+      next.addEventListener('click', function () { page++; render(); });
+      if (mq.addEventListener) mq.addEventListener('change', render);
+      else if (mq.addListener) mq.addListener(render);
+      render();
+    })();
+  </script>
+  )}
+</BaseLayout>
+
+<style>
+  /* volume & anatomy match the archive's drawers: serif f-note titles,
+     mono f-meta records, dusty marks, dotted rules — nothing louder. */
+  .dom-contact {
+    margin: var(--sp-2) 0 0;
+    font-family: var(--mono);
+    font-size: var(--f-meta);
+    color: var(--t3);
+  }
+  .dom-contact a {
+    color: var(--ember);
+    border-bottom: 1px solid var(--line);
+  }
+  .dom-contact a:hover { color: var(--ember-hot); border-bottom-color: var(--ember-hot); }
+
+  .dom-reg { margin-top: var(--sp-6); }
+
+  .dom-list { margin-top: 2px; }
+  .dom-list li { border-top: 1px dotted var(--dash); }
+  .dom-list li:first-child { border-top: 0; }
+  .dom-row { display: flex; align-items: baseline; gap: 10px; padding: 8px 0; color: inherit; }
+  .dom-mark { color: var(--indigo); flex: none; font-size: var(--f-meta); }
+  .dom-mark.is-done { color: var(--t4); }
+  .dom-name {
+    font-family: var(--serif);
+    font-size: var(--f-note);
+    font-weight: 600;
+    color: var(--t1);
+    line-height: var(--lh-type);
+    flex: none;
+  }
+  a.dom-row:hover .dom-name { color: var(--ember-hot); }
+  .dom-note {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-family: var(--mono);
+    font-size: var(--f-meta);
+    line-height: var(--lh-type);
+    color: var(--t3);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .dom-note.is-ph { color: var(--t4); font-style: italic; }
+  .dom-go { margin-left: auto; color: var(--ember); flex: none; font-size: var(--f-meta); }
+  a.dom-row:hover .dom-go { color: var(--ember-hot); }
+  .dom-price {
+    margin-left: auto;
+    flex: none;
+    font-family: var(--mono);
+    font-size: var(--f-meta);
+    color: var(--indigo);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .dom-price.is-blank { color: var(--t4); font-style: italic; }
+  /* price & note must not collide when both present: note shrinks, price fixed */
+  .dom-row .dom-note { margin-right: 4px; }
+
+  /* desktop: the receipts settle into two columns — same rhythm, half the scroll */
+  @media (min-width: 641px) {
+    .dom-sold .dom-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: var(--sp-8);
+      align-items: start;
+    }
+    /* the dotted rule belongs to each row; only the first grid row goes without */
+    .dom-sold .dom-list li:nth-child(-n+2) { border-top: 0; }
+  }
+
+  /* the receipts — a native <details> drawer, study-door anatomy */
+  .dom-sold { margin-top: var(--sp-8); }
+  .dom-sold summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    border-top: 1px dotted var(--dash);
+    padding: 10px 0;
+  }
+  .dom-sold summary::-webkit-details-marker { display: none; }
+  .dom-sold summary:focus-visible { outline: 2px solid var(--ember-hot); outline-offset: 2px; }
+  .s-dot { color: var(--indigo); font-size: 11px; flex: none; }
+  .s-lab {
+    flex: none;
+    font-family: var(--sans);
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--t1);
+  }
+  .s-note { font-family: var(--mono); font-size: var(--f-meta); color: var(--t3); min-width: 0; }
+  .s-chev { margin-left: auto; flex: none; font-family: var(--mono); font-size: var(--f-meta); color: var(--t3); }
+  .s-chev::after { content: '+'; }
+  .dom-sold[open] .s-chev::after { content: '–'; }
+  .dom-sold[open] summary { border-bottom: 0; }
+
+  /* sold pager — hidden until JS activates it on mobile; SSR shows all */
+  .s-pager {
+    display: flex; align-items: center; justify-content: center;
+    gap: var(--sp-6); margin-top: var(--sp-2); padding: var(--sp-3) 0 2px;
+    border-top: 1px dotted var(--dash);
+  }
+  .s-pager[hidden] { display: none; }
+  .s-pager button {
+    font-family: var(--mono); font-size: var(--f-note); line-height: 1;
+    color: var(--t1); background: none; border: 0; padding: 8px 10px; cursor: pointer;
+    transition: color .12s ease;
+  }
+  .s-pager button:hover:not(:disabled) { color: var(--ember-hot); }
+  .s-pager button:focus-visible { outline: 2px solid var(--ember-hot); outline-offset: 2px; }
+  .s-pager button:disabled { color: var(--t4); cursor: default; }
+  .s-pcount { font-family: var(--mono); font-size: var(--f-meta); color: var(--t3); font-variant-numeric: tabular-nums; }
+
+  @media (min-width: 641px) { .s-pager { display: none; } }
+
+  @media (max-width: 640px) {
+    /* real touch targets, same as the study's shelf rows */
+    .dom-row { padding: 10px 0; }
+    .dom-sold summary { padding: 12px 0; }
+    /* name on the first line, the note wraps to its own second line */
+    .dom-row { flex-wrap: wrap; row-gap: 2px; }
+    .dom-note { flex: 1 1 100%; white-space: normal; overflow: visible; }
+    /* the receipts' sub-note crowds the summary on small screens — keep one line */
+    .s-note { display: none; }
+  }
+</style>

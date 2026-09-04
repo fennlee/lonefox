@@ -3,27 +3,36 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PawTrail from '../../components/PawTrail.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
-import { archive } from '../../../lonefox.config';
+import { archive, withAccent } from '../../../lonefox.config';
 
 const kindOf = (p: CollectionEntry<'blog'>) =>
   p.data.category === 'tech' ? 'tech' : p.data.category === 'travel' ? 'travel' : 'notes';
 
-const all = (await getCollection('blog'))
+const allPosts = (await getCollection('blog'))
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const format = (d: Date) => d.toLocaleDateString('en-CA').replaceAll('-', '.');
 const hrefOf = (p: CollectionEntry<'blog'>) => `/archive/${p.id.replace(/\.md$/, '')}/`;
+const locOf = (p: CollectionEntry<'blog'>) => p.data.location?.split('（')[0] || '';
+const h = withAccent(archive.headline, archive.accent);
 ---
 <BaseLayout title="Archive" description={archive.lede}>
   <div class="study">
     <header class="arch-head">
-      <span class="article-meta">{archive.meta}</span>
-      <h1 class="arch-headline">{archive.headline}</h1>
-      <p class="lede">{archive.lede}</p>
+      <div class="study-head">
+        {archive.photo.src && (
+          <img class="study-head-photo" src={archive.photo.src} alt={archive.photo.alt || ''} />
+        )}
+        <div class="study-head-text">
+          <span class="article-meta">{archive.meta}</span>
+          <h1 class="arch-headline">{h.before}<span style="color: var(--ember)">{h.accent}</span>{h.after}</h1>
+          <p class="lede arch-lede">{archive.lede}</p>
+        </div>
+      </div>
     </header>
     <hr class="ledge-divider" />
     {archive.drawers.map((d) => {
-      const posts = all.filter((p) => kindOf(p) === d.key);
+      const posts = allPosts.filter((p) => kindOf(p) === d.key);
       return (
         <section class="reg">
           <h3 class="reg-title">{d.shelf} <span class="dot">·</span><span class="reg-hint">{d.hint}</span><span class="reg-count">{posts.length} filed</span></h3>
@@ -32,7 +41,7 @@ const hrefOf = (p: CollectionEntry<'blog'>) => `/archive/${p.id.replace(/\.md$/,
               <li>
                 <a class="reg-row" href={hrefOf(p)}>
                   <span class="reg-ico">{d.mark}</span>
-                  {d.key === 'travel' && p.data.location && <span class="reg-loc">{p.data.location}</span>}
+                  {d.key === 'travel' && locOf(p) && <span class="reg-loc">{locOf(p)}</span>}
                   <span class="reg-title2">{p.data.title}</span>
                   <time class="reg-date">{format(p.data.date)}</time>
                 </a>

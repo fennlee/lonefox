@@ -9,7 +9,7 @@ export async function GET(context: { site?: URL }) {
     .filter((p) => !p.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   return rss({
-    title: `${site.name} — ${site.motto}`,
+    title: site.rssTitle || `${site.name} — ${site.motto}`,
     description: site.description,
     site: context.site ?? site.url,
     items: posts.map((post) => ({

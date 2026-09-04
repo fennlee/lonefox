@@ -9,7 +9,7 @@
 ## 特性
 
 - Markdown 文章（`src/content/blog/`）
-- 首页、归档、关于、404、RSS、sitemap
+- 首页、归档、关于、域名、404、RSS、sitemap
 - 浅色 / 深色
 - 一份配置：`lonefox.config.ts`
 
@@ -38,7 +38,7 @@ npm run dev
 └── public/
 ```
 
-文章字段：`title`、`date`、`description`、`category`（`tech` | `notes` | `travel`），可选 `location`。
+文章字段：`title`、`date`、`description`、`category`（`tech` | `notes` | `travel` | `poem`），可选 `location`、`cover`、`images`。
 
 ## 配置
 
@@ -47,9 +47,11 @@ npm run dev
 | 字段 | |
 |---|---|
 | `site` | 站名、简介、域名、邮箱、github |
+| `nav` | 导航 |
 | `home` | 首页文案 |
 | `about` | 关于页 |
 | `archive` | 归档标签 |
+| `domains` | 可选米表（空则不用） |
 
 颜色在 `src/styles/global.css`。
 

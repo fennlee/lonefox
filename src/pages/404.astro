@@ -1,14 +1,24 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { notFound } from '../../lonefox.config';
+const h = notFound.headline;
+const here = 'here';
+const i = h.lastIndexOf(here);
+const before = i >= 0 ? h.slice(0, i) : h;
+const after = i >= 0 ? h.slice(i + here.length) : '';
 ---
-<BaseLayout title="Not found" description="no path leads here.">
+<BaseLayout title="Not found" description={notFound.lede}>
   <article class="article">
-    <span class="article-meta">404 / trail gone cold</span>
-    <h1 class="arch-headline">no path leads here</h1>
-    <p class="lede">the trail goes cold here — the page may have moved into the study, or this path was never walked at all.</p>
+    <header>
+      <span class="article-meta">{notFound.meta}</span>
+      <h1 class="article-title">{before}<span style="color: var(--ember)">{i >= 0 ? here : ''}</span>{after}</h1>
+      <p class="lede">{notFound.lede}</p>
+    </header>
+    <hr class="ledge-divider" />
     <div class="links">
       <a href="/">back to the den</a>
       <a href="/archive/">the study →</a>
+      <a href="/about/">about</a>
     </div>
   </article>
 </BaseLayout>

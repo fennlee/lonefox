@@ -1,7 +1,9 @@
 /**
- * lonefox — edit this file, then put writing in src/content/blog/.
- * Do not rearrange the rooms.
+ * lonefox — site identity and copy.
+ * Posts live in src/content/blog/. Colors live in src/styles/global.css.
  */
+export type Tone = 'ember' | 'indigo' | 'glow';
+
 export const site = {
   name: 'lonefox',
   wordmark: 'lonefox',
@@ -12,6 +14,9 @@ export const site = {
   author: 'your name',
   email: 'you@example.com',
   github: 'https://github.com/1907/lonefox',
+  ogImage: '/images/share.png',
+  themeKey: 'lonefox-theme',
+  rssTitle: '',
 };
 
 export const nav = [
@@ -19,7 +24,7 @@ export const nav = [
   { href: '/archive/', label: 'study' },
   { href: '/about/', label: 'about' },
   { href: '/rss.xml', label: 'rss' },
-] as const;
+];
 
 export const home = {
   door: 'come in. the kettle is on.',
@@ -36,12 +41,13 @@ export const home = {
     ],
     note: 'lonefox · somewhere',
   },
+  portrait: { src: '', alt: '' },
   themes: {
     label: 'traces along the road',
     tags: [
-      { name: 'systems', tone: 'ember' as const, ico: '⌗' },
-      { name: 'words', tone: 'indigo' as const, ico: '§' },
-      { name: 'walks', tone: 'glow' as const, ico: '⌖' },
+      { name: 'systems', tone: 'ember' as Tone, ico: '⌗' },
+      { name: 'words', tone: 'indigo' as Tone, ico: '§' },
+      { name: 'walks', tone: 'glow' as Tone, ico: '⌖' },
     ],
   },
   shelf: {
@@ -69,17 +75,45 @@ export const home = {
 export const about = {
   meta: 'about this road',
   headline: 'who keeps going',
+  accent: 'going',
   lede: 'one column. a few rooms. writing that earns its place.',
+  ledeSoft: '',
   quote: 'if a thing is worth carrying, it earns its place along the road.',
+  photo: { src: '', alt: '' },
+  skills: [] as { label: string; tone: Tone; tags: string[] }[],
 };
 
 export const archive = {
   meta: 'the study / archive',
   headline: 'everything filed so far',
+  accent: 'filed',
   lede: 'three shelves — the workbench, the paper, the maps.',
+  photo: { src: '', alt: '' },
   drawers: [
     { key: 'tech', shelf: 'the workbench shelf', hint: 'systems & tooling', mark: '◇' },
     { key: 'notes', shelf: 'the paper shelf', hint: 'notes & thoughts', mark: '♡' },
     { key: 'travel', shelf: 'the map shelf', hint: 'gone somewhere', mark: '⌖' },
   ],
 };
+
+export const domains = {
+  meta: 'the trade / names',
+  headline: 'names i carried in',
+  accent: 'carried in',
+  lede: 'every name below i own outright — no brokers, no auctions, no waiting.',
+  contact: '',
+  forTrade: [] as { d: string; note: string }[],
+  sold: [] as { d: string; p?: number; note?: string }[],
+};
+
+export const notFound = {
+  meta: '404 / trail gone cold',
+  headline: 'no path leads here',
+  lede: 'the trail goes cold here — the page may have moved into the study, or this path was never walked at all.',
+};
+
+export function withAccent(text: string, accent?: string) {
+  if (!accent || !text.includes(accent)) return { before: text, accent: '', after: '' };
+  const i = text.indexOf(accent);
+  return { before: text.slice(0, i), accent, after: text.slice(i + accent.length) };
+}
