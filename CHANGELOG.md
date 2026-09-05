@@ -6,13 +6,15 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versioning: [S
 
 ### Added
 
-- `/scraps/` for poems and walks. The study keeps long writing.
+- `/scraps/` for poems, walks, and notes. Same ledger as the study, with a kind mark on each row. The study lives at `/study/`.
 - `site.years` in config for the footer range (default: current year).
 
 ### Changed
 
-- Archive drawers are workbench + paper only. Travel rows move to scraps.
-- Domains stay off the primary nav; about links to the trade when names exist.
+- `/archive/` redirects to `/study/`. Post permalinks split: technical notes under `/study/…`, everything else under `/scraps/…`.
+- RSS: `/rss.xml` is the whole den; `/study/rss.xml` and `/scraps/rss.xml` are the rooms.
+- Archive drawers are the workbench only. Notes, poems, and walks live in scraps.
+- Domains stay off the primary nav; about links `domains` when names exist.
 - README (en + zh): describe lonefox as an Astro blog theme.
 
 ### Fixed

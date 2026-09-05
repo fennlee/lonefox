@@ -22,7 +22,7 @@ export const site = {
 
 export const nav = [
   { href: '/', label: 'home' },
-  { href: '/archive/', label: 'study' },
+  { href: '/study/', label: 'study' },
   { href: '/scraps/', label: 'scraps' },
   { href: '/about/', label: 'about' },
   { href: '/rss.xml', label: 'rss' },
@@ -89,20 +89,21 @@ export const archive = {
   meta: 'the study / archive',
   headline: 'everything filed so far',
   accent: 'filed',
-  lede: 'two shelves — the workbench and the paper. poems and walks live with the scraps.',
+  lede: 'the workbench. systems and tooling.',
   photo: { src: '', alt: '' },
   drawers: [
     { key: 'tech', shelf: 'the workbench shelf', hint: 'systems & tooling', mark: '◇' },
-    { key: 'notes', shelf: 'the paper shelf', hint: 'notes that ran long', mark: '♡' },
   ],
 };
 
 export const scraps = {
-  meta: 'scraps / short paper',
-  headline: 'the short paper',
-  accent: 'short',
-  lede: 'poems and walks. too short for the study.',
+  meta: 'scraps',
+  headline: 'the rest of the paper',
+  accent: 'rest',
+  lede: 'poems, walks, and notes that are not tooling.',
+  photo: { src: '', alt: '' },
   drawers: [
+    { key: 'notes', shelf: 'the paper', hint: 'notes that stayed', mark: '♡' },
     { key: 'poem', shelf: 'the poems', hint: 'lines that stayed', mark: '✎' },
     { key: 'travel', shelf: 'the maps', hint: 'gone somewhere', mark: '⌖' },
   ],

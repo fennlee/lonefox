@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PawTrail from '../../components/PawTrail.astro';
+import { getCollection } from 'astro:content';
+import { archive, withAccent } from 'lonefox/config';
+import { hrefOf, isTech } from '../../lib/posts';
+
+const allPosts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft && isTech(p))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const format = (d: Date) => d.toLocaleDateString('en-CA').replaceAll('-', '.');
+const h = withAccent(archive.headline, archive.accent);
+const drawer = archive.drawers[0];
+---
+<BaseLayout title="Study" description={archive.lede}>
+  <div class="study">
+    <header class="arch-head">
+      <div class="study-head">
+        {archive.photo.src && (
+          <div class="study-head-frame">
+            <img class="study-head-photo" src={archive.photo.src} alt={archive.photo.alt || ''} />
+          </div>
+        )}
+        <div class="study-head-text">
+          <span class="article-meta">{archive.meta} · <a href="/study/rss.xml">rss</a></span>
+          <h1 class="arch-headline">{h.before}<span style="color: var(--ember)">{h.accent}</span>{h.after}</h1>
+          <p class="lede arch-lede">{archive.lede}</p>
+        </div>
+      </div>
+    </header>
+    <hr class="ledge-divider" />
+    {drawer && (
+      <section class="reg">
+        <h3 class="reg-title">{drawer.shelf} <span class="dot">·</span><span class="reg-hint">{drawer.hint}</span><span class="reg-count">{allPosts.length} filed</span></h3>
+        <ul class="reg-list">
+          {allPosts.map((p) => (
+            <li>
+              <a class="reg-row" href={hrefOf(p)}>
+                <span class="reg-ico">{drawer.mark}</span>
+                <span class="reg-title2">{p.data.title}</span>
+                <time class="reg-date">{format(p.data.date)}</time>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+    <PawTrail count={3} />
+    <a class="back-den" href="/">← back to the den</a>
+  </div>
+</BaseLayout>

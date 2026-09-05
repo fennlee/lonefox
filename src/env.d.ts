@@ -60,6 +60,7 @@ declare module 'lonefox/config' {
     headline: string;
     accent: string;
     lede: string;
+    photo: { src: string; alt: string };
     drawers: { key: string; shelf: string; hint: string; mark: string }[];
   };
 

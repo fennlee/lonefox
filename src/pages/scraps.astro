@@ -2,23 +2,26 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PawTrail from '../components/PawTrail.astro';
 import { getCollection } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
 import { scraps as room, withAccent } from 'lonefox/config';
+import { hrefOf, isScrap, kindLabel, locOf, scrapKind } from '../lib/posts';
 
 const allPosts = (await getCollection('blog'))
-  .filter((p) => !p.data.draft)
+  .filter((p) => !p.data.draft && isScrap(p))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const format = (d: Date) => d.toLocaleDateString('en-CA').replaceAll('-', '.');
-const hrefOf = (p: CollectionEntry<'blog'>) => `/archive/${p.id.replace(/\.md$/, '')}/`;
-const locOf = (p: CollectionEntry<'blog'>) => p.data.location?.split('（')[0] || '';
 const h = withAccent(room.headline, room.accent);
 ---
 <BaseLayout title="Scraps" description={room.lede}>
   <div class="study">
     <header class="arch-head">
       <div class="study-head">
+        {room.photo.src && (
+          <div class="study-head-frame">
+            <img class="study-head-photo" src={room.photo.src} alt={room.photo.alt || ''} />
+          </div>
+        )}
         <div class="study-head-text">
-          <span class="article-meta">{room.meta}</span>
+          <span class="article-meta">{room.meta} · <a href="/scraps/rss.xml">rss</a></span>
           <h1 class="arch-headline">{h.before}<span style="color: var(--ember)">{h.accent}</span>{h.after}</h1>
           <p class="lede arch-lede">{room.lede}</p>
         </div>
@@ -26,22 +29,27 @@ const h = withAccent(room.headline, room.accent);
     </header>
     <hr class="ledge-divider" />
     {room.drawers.map((d) => {
-      const posts = allPosts.filter((p) => p.data.category === d.key);
+      const posts = allPosts.filter((p) => scrapKind(p) === d.key);
       if (posts.length === 0) return null;
       return (
         <section class="reg">
           <h3 class="reg-title">{d.shelf} <span class="dot">·</span><span class="reg-hint">{d.hint}</span><span class="reg-count">{posts.length} kept</span></h3>
           <ul class="reg-list">
-            {posts.map((p) => (
-              <li>
-                <a class="reg-row" href={hrefOf(p)}>
-                  <span class="reg-ico">{d.mark}</span>
-                  {d.key === 'travel' && locOf(p) && <span class="reg-loc">{locOf(p)}</span>}
-                  <span class="reg-title2">{p.data.title}</span>
-                  <time class="reg-date">{format(p.data.date)}</time>
-                </a>
-              </li>
-            ))}
+            {posts.map((p) => {
+              const kind = scrapKind(p);
+              const place = kind === 'travel' ? locOf(p) : '';
+              return (
+                <li>
+                  <a class="reg-row" href={hrefOf(p)}>
+                    <span class="reg-ico">{d.mark}</span>
+                    <span class="reg-kind">{kindLabel(kind)}</span>
+                    {place && <span class="reg-loc">{place}</span>}
+                    <span class="reg-title2">{p.data.title}</span>
+                    <time class="reg-date">{format(p.data.date)}</time>
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </section>
       );

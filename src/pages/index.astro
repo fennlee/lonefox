@@ -4,6 +4,7 @@ import FoxMark from '../components/FoxMark.astro';
 import PawTrail from '../components/PawTrail.astro';
 import { getCollection } from 'astro:content';
 import { site, home } from 'lonefox/config';
+import { hrefOf } from '../lib/posts';
 
 const posts = (await getCollection('blog'))
   .filter((p) => !p.data.draft)
@@ -77,7 +78,7 @@ const format = (d: Date) => d.toLocaleDateString('en-CA').replaceAll('-', '.');
       <section class="newest">
         <span class="place-lab">{home.table.label} <span class="dot">·</span> {home.table.hint}</span>
         {recent.map((p, i) => (
-          <a class="new-row" href={`/archive/${p.id.replace(/\.md$/, '')}/`}>
+          <a class="new-row" href={hrefOf(p)}>
             <span class="new-dot">✦</span>
             <span class="new-lab">{i === 0 ? 'latest' : 'earlier'}</span>
             <span class="new-date">{format(p.data.date)}</span>
@@ -87,7 +88,7 @@ const format = (d: Date) => d.toLocaleDateString('en-CA').replaceAll('-', '.');
       </section>
     )}
     <PawTrail />
-    <a class="study-door" href="/archive/">
+    <a class="study-door" href="/study/">
       <span class="door" aria-hidden="true"><span class="door-crack"></span><span class="door-handle"></span></span>
       <span class="study-text">
         <span class="study-name">{home.study.label}</span>

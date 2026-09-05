@@ -9,7 +9,7 @@ Use this repository as a GitHub template, or add it as a dependency and keep you
 ## Features
 
 - Markdown posts (`src/content/blog/`)
-- Home, archive, scraps, about, domains, 404, RSS, sitemap
+- Home, study, scraps, about, domains, 404, RSS, sitemap
 - Light / dark mode
 - One config file: `lonefox.config.ts`
 
@@ -50,8 +50,8 @@ Edit [`lonefox.config.ts`](lonefox.config.ts):
 | `nav` | primary links |
 | `home` | home copy |
 | `about` | about page |
-| `archive` | study labels (long writing) |
-| `scraps` | poems and walks |
+| `archive` | study labels (technical writing) |
+| `scraps` | poems, walks, and notes |
 | `domains` | optional trade list (empty = unused; linked from about) |
 
 Colors: `src/styles/global.css`.
