@@ -85,7 +85,7 @@ Square. No card radii.
 
 ## Components
 
-Nav underline grows from the left in ember. Tags are square chips. Archive rows are mark + title + date.
+Nav underline grows from the left in ember. Tags are square chips. Archive and scraps rows are mark + title + date.
 
 ## Do's and Don'ts
 

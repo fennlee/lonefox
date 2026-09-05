@@ -1,16 +1,9 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import PawTrail from '../../components/PawTrail.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PawTrail from '../components/PawTrail.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
-import { archive, withAccent } from 'lonefox/config';
-
-const kindOf = (p: CollectionEntry<'blog'>) => {
-  const cat = p.data.category;
-  if (cat === 'tech') return 'tech';
-  if (cat === 'notes' || cat === 'note') return 'notes';
-  return '';
-};
+import { scraps as room, withAccent } from 'lonefox/config';
 
 const allPosts = (await getCollection('blog'))
   .filter((p) => !p.data.draft)
@@ -18,29 +11,26 @@ const allPosts = (await getCollection('blog'))
 const format = (d: Date) => d.toLocaleDateString('en-CA').replaceAll('-', '.');
 const hrefOf = (p: CollectionEntry<'blog'>) => `/archive/${p.id.replace(/\.md$/, '')}/`;
 const locOf = (p: CollectionEntry<'blog'>) => p.data.location?.split('（')[0] || '';
-const h = withAccent(archive.headline, archive.accent);
+const h = withAccent(room.headline, room.accent);
 ---
-<BaseLayout title="Archive" description={archive.lede}>
+<BaseLayout title="Scraps" description={room.lede}>
   <div class="study">
     <header class="arch-head">
       <div class="study-head">
-        {archive.photo.src && (
-          <img class="study-head-photo" src={archive.photo.src} alt={archive.photo.alt || ''} />
-        )}
         <div class="study-head-text">
-          <span class="article-meta">{archive.meta}</span>
+          <span class="article-meta">{room.meta}</span>
           <h1 class="arch-headline">{h.before}<span style="color: var(--ember)">{h.accent}</span>{h.after}</h1>
-          <p class="lede arch-lede">{archive.lede}</p>
+          <p class="lede arch-lede">{room.lede}</p>
         </div>
       </div>
     </header>
     <hr class="ledge-divider" />
-    {archive.drawers.map((d) => {
-      const posts = allPosts.filter((p) => kindOf(p) === d.key);
+    {room.drawers.map((d) => {
+      const posts = allPosts.filter((p) => p.data.category === d.key);
       if (posts.length === 0) return null;
       return (
         <section class="reg">
-          <h3 class="reg-title">{d.shelf} <span class="dot">·</span><span class="reg-hint">{d.hint}</span><span class="reg-count">{posts.length} filed</span></h3>
+          <h3 class="reg-title">{d.shelf} <span class="dot">·</span><span class="reg-hint">{d.hint}</span><span class="reg-count">{posts.length} kept</span></h3>
           <ul class="reg-list">
             {posts.map((p) => (
               <li>

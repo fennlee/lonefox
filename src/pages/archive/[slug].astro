@@ -14,22 +14,26 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const isPoem = post.data.category === 'poem';
+const isScrap = post.data.category === 'poem' || post.data.category === 'travel';
 const poemParas = isPoem ? (post.body ?? '').trim().split(/\n[ \t]*\n/).map((s) => s.replace(/\s+$/, '')) : [];
 const format = (d: Date) => d.toLocaleDateString('en-CA').replaceAll('-', '.');
-const i = all.findIndex((p) => p.id === post.id);
-const newer = i > 0 ? all[i - 1] : null;
-const older = i < all.length - 1 ? all[i + 1] : null;
+const lane = all.filter((p) => (p.data.category === 'poem' || p.data.category === 'travel') === isScrap);
+const i = lane.findIndex((p) => p.id === post.id);
+const newer = i > 0 ? lane[i - 1] : null;
+const older = i < lane.length - 1 ? lane[i + 1] : null;
 const href = (p: typeof newer) => (p ? `/archive/${p.id.replace(/\.md$/, '')}/` : null);
 const cat = post.data.category;
 const metacat = cat === 'travel' ? 'travel' : cat === 'poem' ? 'poetry' : cat === 'tech' ? 'technical note' : 'note';
 const pageClass = cat === 'poem' ? 'article poem' : cat === 'travel' ? 'article travel' : 'article';
 const hasPhotos = Array.isArray(post.data.images) && post.data.images.length > 0;
 const cover = post.data.cover || (hasPhotos ? post.data.images[0] : '');
+const backHref = isScrap ? '/scraps/' : '/archive/';
+const backLabel = isScrap ? 'scraps' : 'the study';
 ---
 <BaseLayout title={post.data.title} description={post.data.description} type="article" image={cover || undefined}>
   <article class={pageClass}>
     <header>
-      <a class="back-archive" href="/archive/"><span>←</span> the study</a>
+      <a class="back-archive" href={backHref}><span>←</span> {backLabel}</a>
       <span class="article-meta">{metacat} / {format(post.data.date)}{post.data.location ? ` · ${post.data.location}` : ''}</span>
       <h1 class="article-title">{post.data.title}</h1>
       {post.data.description && <p class="lede">{post.data.description}</p>}
@@ -53,7 +57,9 @@ const cover = post.data.cover || (hasPhotos ? post.data.images[0] : '');
         {older && <a href={href(older)}><small>older</small>← {older.data.title}</a>}
         {newer && <a href={href(newer)}><small>newer</small>{newer.data.title} →</a>}
       </div>
-      <a class="post-nav-ledger" href="/archive/"><small>the study</small>browse the shelves →</a>
+      {isScrap
+        ? <a class="post-nav-ledger" href="/scraps/"><small>scraps</small>more short paper →</a>
+        : <a class="post-nav-ledger" href="/archive/"><small>the study</small>browse the shelves →</a>}
     </div>
   </article>
 </BaseLayout>

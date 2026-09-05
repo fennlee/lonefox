@@ -55,6 +55,14 @@ declare module 'lonefox/config' {
     drawers: { key: string; shelf: string; hint: string; mark: string }[];
   };
 
+  export const scraps: {
+    meta: string;
+    headline: string;
+    accent: string;
+    lede: string;
+    drawers: { key: string; shelf: string; hint: string; mark: string }[];
+  };
+
   export const domains: {
     meta: string;
     headline: string;
