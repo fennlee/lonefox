@@ -17,6 +17,7 @@ declare module 'lonefox/config' {
     favicon: string;
     themeKey: string;
     rssTitle: string;
+    years?: string;
   };
 
   export const nav: { href: string; label: string }[];

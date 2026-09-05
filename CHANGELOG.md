@@ -4,6 +4,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versioning: [S
 
 ## [Unreleased]
 
+### Added
+
+- `site.years` in config for the footer range (default: current year).
+
 ### Changed
 
 - README (en + zh): describe lonefox as an Astro blog theme.

@@ -15,6 +15,7 @@ const type = Astro.props.type || 'website';
 const favicon = site.favicon || '/favicon.svg';
 const themeKey = site.themeKey || 'lonefox-theme';
 const rssTitle = site.rssTitle || `${site.name} — ${site.motto}`;
+const years = site.years || String(new Date().getFullYear());
 ---
 <!doctype html>
 <html lang={site.lang}>
@@ -75,7 +76,7 @@ const rssTitle = site.rssTitle || `${site.name} — ${site.motto}`;
         <slot />
       </main>
       <footer class="site-foot">
-        <span>{new Date().getFullYear()} · <a href="/">{site.name}</a> — {site.motto}</span>
+        <span>{years} · <a href="/">{site.name}</a> — {site.motto}</span>
         <span class="sleeping-fox" title="asleep">
           <SleepingFox />
           <span class="zzz">z</span>
