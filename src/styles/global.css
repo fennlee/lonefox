@@ -367,9 +367,9 @@ ul, ol { list-style: none; padding: 0; }
 .article-title, .article h1 { font-family: var(--serif); font-size: 1.7rem; font-weight: 700; color: var(--t0); line-height: 1.12; margin-bottom: var(--sp-3); }
 .lede { font-family: var(--mono); font-size: var(--f-meta); color: var(--t2); border-left: 2px solid var(--indigo); padding-left: var(--sp-3); margin-bottom: var(--sp-6); line-height: 1.6; }
 .lede-smile { display: inline-block; margin-left: 0.2em; vertical-align: -0.05em; font-size: 1.05em; }
-/* the reading voice — CJK prose breathes: a hair more size, a hair
-   more tracking; hanzi never get fake-italic emphasis (colour only). */
-.prose { font-size: 0.98rem; line-height: 1.95; color: var(--t2); letter-spacing: 0.012em; }
+/* the reading voice — Latin on Alegreya, hanzi on WenKai via --serif.
+   CJK breathes: a hair more size and tracking; no fake-italic on hanzi. */
+.prose { font-family: var(--serif); font-size: 0.98rem; line-height: 1.95; color: var(--t2); letter-spacing: 0.012em; }
 .prose h2 { font-family: var(--serif); font-size: 1.25rem; color: var(--ember); margin: var(--sp-8) 0 var(--sp-3); }
 .prose h3 { font-family: var(--serif); font-size: 1.05rem; color: var(--t1); margin: var(--sp-6) 0 var(--sp-2); }
 .prose p { margin: 0 0 var(--sp-4); }

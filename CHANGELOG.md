@@ -11,6 +11,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versioning: [S
 
 ### Changed
 
+- Article `.prose` uses the serif chain (Alegreya / WenKai) instead of inheriting Arial from `body`.
 - `/archive/` redirects to `/study/`. Post permalinks split: technical notes under `/study/…`, everything else under `/scraps/…`.
 - RSS: `/rss.xml` is the whole den; `/study/rss.xml` and `/scraps/rss.xml` are the rooms.
 - Archive drawers are the workbench only. Notes, poems, and walks live in scraps.
