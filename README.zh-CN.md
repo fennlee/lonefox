@@ -16,7 +16,7 @@
 ## 快速开始
 
 ```bash
-git clone https://github.com/1907/lonefox.git
+git clone https://github.com/prust/lonefox.git
 cd lonefox
 npm install
 npm run dev

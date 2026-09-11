@@ -13,7 +13,7 @@ export const site = {
   lang: 'en',
   author: 'your name',
   email: 'you@example.com',
-  github: 'https://github.com/1907/lonefox',
+  github: 'https://github.com/prust/lonefox',
   ogImage: '/images/share.png',
   favicon: '/favicon.svg',
   themeKey: 'lonefox-theme',
