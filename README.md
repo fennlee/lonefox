@@ -16,7 +16,7 @@ Use this repository as a GitHub template, or add it as a dependency and keep you
 ## Quick start
 
 ```bash
-git clone https://github.com/prust/lonefox.git
+git clone https://github.com/hareai/lonefox.git
 cd lonefox
 npm install
 npm run dev
