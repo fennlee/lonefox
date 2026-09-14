@@ -6,5 +6,6 @@ dist/
 *.jpg
 *.webp
 !public/**
+!docs/*.png
 .impeccable/
 .hermes/

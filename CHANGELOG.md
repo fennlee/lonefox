@@ -6,6 +6,9 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versioning: [S
 
 ### Added
 
+- `site.marks` (`wordmark`, `sleeping`, `paw`) to swap the fox drawings via config. Empty uses the built-in SVG.
+- Empty portrait / about / study / scraps photos keep the same paper frame (no “portrait” placeholder).
+- README screenshot: the hare home page.
 - `/scraps/` for poems, walks, and notes. Same ledger as the study, with a kind mark on each row. The study lives at `/study/`.
 - `site.years` in config for the footer range (default: current year).
 

@@ -220,8 +220,15 @@ ul, ol { list-style: none; padding: 0; }
 /* ── home layout — identity card | content, on one aligned baseline ── */
 .layout { display: flex; gap: clamp(24px, 6vw, 56px); align-items: flex-start; }
 .profile { width: 140px; flex: 0 0 140px; }
-.avatar-frame { width: 100%; aspect-ratio: 1 / 1.28; padding: 4px; border: 1px solid var(--line); background: var(--soft); }
+.avatar-frame { width: 100%; aspect-ratio: 1 / 1.28; padding: 4px; border: 1px solid var(--line); background: var(--soft); box-sizing: border-box; }
 .avatar-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.avatar-frame.is-empty {
+  background:
+    radial-gradient(70% 55% at 50% 42%, var(--ember-soft), transparent 70%),
+    var(--soft);
+}
+.fox-mark-img { object-fit: contain; display: block; }
+.sleeping-fox-img { display: block; object-fit: contain; }
 .identity { margin-top: 12px; font-size: var(--f-meta); }
 .idrow { display: flex; align-items: center; min-height: 24px; }
 .idmark { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; margin-right: 7px; background: var(--ember); color: #fff; font-size: 11px; flex: none; }
@@ -297,9 +304,12 @@ ul, ol { list-style: none; padding: 0; }
 
 /* ── paw trail — a quiet fox footprint leading to the study door ── */
 .paw-trail { display: flex; align-items: center; justify-content: flex-start; gap: 26px; margin: var(--sp-10, 2.5rem) 0 var(--sp-3); color: var(--t4); opacity: .5; }
-.paw-trail svg { width: 13px; height: 13px; fill: currentColor; }
-.paw-trail svg:nth-child(odd) { transform: translateY(5px) rotate(6deg); }
-.paw-trail svg:nth-child(even) { transform: translateY(-4px) rotate(-4deg); }
+.paw-trail svg,
+.paw-trail img { width: 13px; height: 13px; fill: currentColor; display: block; object-fit: contain; }
+.paw-trail svg:nth-child(odd),
+.paw-trail img:nth-child(odd) { transform: translateY(5px) rotate(6deg); }
+.paw-trail svg:nth-child(even),
+.paw-trail img:nth-child(even) { transform: translateY(-4px) rotate(-4deg); }
 
 /* ── dotted divider ─────────────────────────────────────────────────── */
 .ledge-divider { border: 0; border-top: 1px dotted var(--dash); margin: var(--sp-8) 0; }
@@ -418,10 +428,16 @@ ul, ol { list-style: none; padding: 0; }
   align-self: flex-start;
   border: 1px solid var(--line);
   background: var(--soft);
+  box-sizing: border-box;
+}
+.about-photo.is-empty {
+  background:
+    radial-gradient(70% 55% at 50% 42%, var(--ember-soft), transparent 70%),
+    var(--soft);
 }
 /* at night the ink sketch flips: dark ground, soft light lines — a
    drawing pinned on the den wall, not a backlit photo */
-[data-theme="dark"] .about-photo { filter: invert(.9) brightness(.6) contrast(.9); border-color: var(--line); }
+[data-theme="dark"] img.about-photo { filter: invert(.9) brightness(.6) contrast(.9); border-color: var(--line); }
 
 /* ── about — three skill groups, quiet chips, same tokens ──────────── */
 .skills { display: flex; flex-direction: column; gap: var(--sp-3); margin: var(--sp-3) 0 var(--sp-6); }
@@ -666,9 +682,16 @@ html {
 .study-head-frame {
   flex: 0 0 140px;
   width: 140px;
+  aspect-ratio: 1 / 1.28;
   padding: 4px;
   border: 1px solid var(--line);
   background: var(--soft);
+  box-sizing: border-box;
+}
+.study-head-frame.is-empty {
+  background:
+    radial-gradient(70% 55% at 50% 42%, var(--ember-soft), transparent 70%),
+    var(--soft);
 }
 .study-head-photo {
   display: block;
@@ -680,8 +703,15 @@ html {
 }
 .study-head-text { flex: 1 1 auto; min-width: 0; padding-top: 2px; }
 .study-head-text .article-meta { margin-bottom: var(--sp-2); }
-[data-theme="dark"] .study-head-photo {
+[data-theme="dark"] img.study-head-photo {
   filter: invert(.92) brightness(.62);
+}
+[data-theme="dark"] .avatar-frame.is-empty,
+[data-theme="dark"] .about-photo.is-empty,
+[data-theme="dark"] .study-head-frame.is-empty {
+  background:
+    radial-gradient(70% 55% at 50% 42%, rgba(224,139,79,.10), transparent 70%),
+    var(--soft);
 }
 @media (max-width: 640px) {
   .study-head { gap: var(--sp-6); }
