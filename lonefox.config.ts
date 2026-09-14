@@ -18,6 +18,8 @@ export const site = {
   favicon: '/favicon.svg',
   themeKey: 'lonefox-theme',
   rssTitle: '',
+  // Optional. Empty = built-in fox marks. Paths are site-root public URLs.
+  // marks: { wordmark: '/marks/wordmark.svg', sleeping: '/marks/sleeping.svg', paw: '/marks/paw.svg' },
 };
 
 export const nav = [
@@ -43,7 +45,7 @@ export const home = {
     ],
     note: 'lonefox · somewhere',
   },
-  portrait: { src: '', alt: '' },
+  portrait: { src: '', alt: '' }, // empty src = paper frame, same size
   themes: {
     label: 'traces along the road',
     tags: [

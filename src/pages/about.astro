@@ -6,9 +6,9 @@ const h = withAccent(about.headline, about.accent);
 <BaseLayout title="About" description={about.lede}>
   <article class="article about">
     <div class="about-split">
-      {about.photo.src && (
-        <img class="about-photo" src={about.photo.src} alt={about.photo.alt || ''} />
-      )}
+      {about.photo.src
+        ? <img class="about-photo" src={about.photo.src} alt={about.photo.alt || ''} />
+        : <div class="about-photo is-empty" aria-hidden="true"></div>}
       <div class="about-left">
         <span class="article-meta">{about.meta}</span>
         <h3 class="about-head">{h.before}<span style="color: var(--ember)">{h.accent}</span>{h.after}</h3>

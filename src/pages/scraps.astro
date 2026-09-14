@@ -15,11 +15,11 @@ const h = withAccent(room.headline, room.accent);
   <div class="study">
     <header class="arch-head">
       <div class="study-head">
-        {room.photo.src && (
-          <div class="study-head-frame">
-            <img class="study-head-photo" src={room.photo.src} alt={room.photo.alt || ''} />
-          </div>
-        )}
+        <div class:list={['study-head-frame', !room.photo.src && 'is-empty']} aria-hidden={!room.photo.src || undefined}>
+          {room.photo.src
+            ? <img class="study-head-photo" src={room.photo.src} alt={room.photo.alt || ''} />
+            : null}
+        </div>
         <div class="study-head-text">
           <span class="article-meta">{room.meta} · <a href="/scraps/rss.xml">rss</a></span>
           <h1 class="arch-headline">{h.before}<span style="color: var(--ember)">{h.accent}</span>{h.after}</h1>

@@ -22,10 +22,10 @@ const format = (d: Date) => d.toLocaleDateString('en-CA').replaceAll('-', '.');
       </h1>
       <div class="layout">
         <aside class="profile">
-          <div class="avatar-frame">
+          <div class:list={['avatar-frame', !home.portrait.src && 'is-empty']} aria-hidden={!home.portrait.src || undefined}>
             {home.portrait.src
               ? <img src={home.portrait.src} alt={home.portrait.alt || ''} />
-              : <span>portrait</span>}
+              : null}
           </div>
           <div class="identity">
             {home.identity.rows.map((r) => (

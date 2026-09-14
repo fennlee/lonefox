@@ -16,11 +16,11 @@ const drawer = archive.drawers[0];
   <div class="study">
     <header class="arch-head">
       <div class="study-head">
-        {archive.photo.src && (
-          <div class="study-head-frame">
-            <img class="study-head-photo" src={archive.photo.src} alt={archive.photo.alt || ''} />
-          </div>
-        )}
+        <div class:list={['study-head-frame', !archive.photo.src && 'is-empty']} aria-hidden={!archive.photo.src || undefined}>
+          {archive.photo.src
+            ? <img class="study-head-photo" src={archive.photo.src} alt={archive.photo.alt || ''} />
+            : null}
+        </div>
         <div class="study-head-text">
           <span class="article-meta">{archive.meta} · <a href="/study/rss.xml">rss</a></span>
           <h1 class="arch-headline">{h.before}<span style="color: var(--ember)">{h.accent}</span>{h.after}</h1>
