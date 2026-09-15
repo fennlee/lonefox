@@ -111,16 +111,6 @@ export const scraps = {
   ],
 };
 
-export const domains = {
-  meta: 'the trade / names',
-  headline: 'names i carried in',
-  accent: 'carried in',
-  lede: 'every name below i own outright — no brokers, no auctions, no waiting.',
-  contact: '',
-  forTrade: [] as { d: string; note: string }[],
-  sold: [] as { d: string; p?: number; note?: string }[],
-};
-
 export const notFound = {
   meta: '404 / trail gone cold',
   headline: 'no path leads here',

@@ -11,7 +11,7 @@
 ## 特性
 
 - Markdown 文章（`src/content/blog/`）
-- 首页、书房、纸条、关于、域名、404、RSS、sitemap
+- 首页、书房、纸条、关于、404、RSS、sitemap
 - 浅色 / 深色
 - 一份配置：`lonefox.config.ts`
 - 照片和狐狸标记走配置；照片路径为空则保留纸框
@@ -59,7 +59,6 @@ npm run dev
 | `scraps.photo` | 纸条页头照片（空则纸框） |
 | `archive` | 书房标签（技术文） |
 | `scraps` | 诗、出行、杂记 |
-| `domains` | 可选米表（空则不用；从关于页进入） |
 
 照片和自定义标记放站点 `public/`，配置里写路径。不要改主题源码。
 
