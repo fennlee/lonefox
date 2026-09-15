@@ -4,6 +4,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versioning: [S
 
 ## [Unreleased]
 
+### Removed
+
+- Domains page, `domains` config, and the about-page link. Sale lists are not part of the theme.
+
 ### Added
 
 - `site.marks` (`wordmark`, `sleeping`, `paw`) to swap the fox drawings via config. Empty uses the built-in SVG.
@@ -18,7 +22,6 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versioning: [S
 - `/archive/` redirects to `/study/`. Post permalinks split: technical notes under `/study/…`, everything else under `/scraps/…`.
 - RSS: `/rss.xml` is the whole den; `/study/rss.xml` and `/scraps/rss.xml` are the rooms.
 - Archive drawers are the workbench only. Notes, poems, and walks live in scraps.
-- Domains stay off the primary nav; about links `domains` when names exist.
 - README (en + zh): describe lonefox as an Astro blog theme.
 
 ### Fixed

@@ -581,7 +581,7 @@ ul, ol { list-style: none; padding: 0; }
 .rule-col h3, .reg-title, .study-name {
   text-wrap: balance;
 }
-.soft, .lede, .copy p, .prose p, .dom-note {
+.soft, .lede, .copy p, .prose p {
   text-wrap: pretty;
 }
 html {
@@ -590,7 +590,7 @@ html {
 }
 
 /* dates & counts — tabular so columns never dance as pages load */
-.reg-date, .new-date, .archive .date, .dom-price, .reg-count, .s-pcount {
+.reg-date, .new-date, .archive .date, .reg-count {
   font-variant-numeric: tabular-nums;
 }
 
@@ -598,7 +598,6 @@ html {
 .topnav a:focus-visible, .new-row:focus-visible, .reg-row:focus-visible,
 .study-door:focus-visible, .links a:focus-visible, .back-den:focus-visible,
 .pager a:focus-visible, .post-nav a:focus-visible,
-.dom-row:focus-visible, .s-pager button:focus-visible,
 .ledger-filter-clear:focus-visible {
   outline: 2px solid var(--ember-hot);
   outline-offset: 2px;
@@ -607,7 +606,7 @@ html {
 
 /* quiet transitions — colour & border only, never layout properties */
 .topnav a, .new-row, .reg-row, .study-door, .links a,
-.back-den, .pager a, .post-nav a, .dom-row {
+.back-den, .pager a, .post-nav a {
   transition: color .15s ease, border-color .15s ease;
 }
 .theme-toggle {
@@ -615,14 +614,12 @@ html {
               box-shadow .15s ease, transform .12s ease;
 }
 .theme-toggle:active,
-.s-pager button:active,
 .ledger-filter-clear:active {
   transform: scale(.96);
 }
 
 /* touch — roomier targets on small screens */
 @media (max-width: 640px) {
-  .s-pager button { min-height: 44px; min-width: 44px; }
   .ledger-filter-clear { min-height: 40px; }
   .topnav a { padding: 8px 2px; }
   .theme-toggle { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }

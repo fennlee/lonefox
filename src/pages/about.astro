@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site, about, domains as trade, withAccent } from 'lonefox/config';
+import { site, about, withAccent } from 'lonefox/config';
 const h = withAccent(about.headline, about.accent);
 ---
 <BaseLayout title="About" description={about.lede}>
@@ -42,7 +42,6 @@ const h = withAccent(about.headline, about.accent);
       <a href="/rss.xml">rss</a>
       <a href="/study/">the study →</a>
       <a href="/scraps/">scraps →</a>
-      {(trade.forTrade.length > 0 || trade.sold.length > 0) && <a href="/domains/">domains →</a>}
     </div>
   </article>
 </BaseLayout>

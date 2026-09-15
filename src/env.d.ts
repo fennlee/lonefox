@@ -65,16 +65,6 @@ declare module 'lonefox/config' {
     drawers: { key: string; shelf: string; hint: string; mark: string }[];
   };
 
-  export const domains: {
-    meta: string;
-    headline: string;
-    accent: string;
-    lede: string;
-    contact: string;
-    forTrade: { d: string; note: string }[];
-    sold: { d: string; p?: number; note?: string }[];
-  };
-
   export const notFound: { meta: string; headline: string; lede: string };
 
   export function withAccent(

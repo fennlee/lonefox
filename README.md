@@ -11,7 +11,7 @@ Use this repository as a GitHub template, or add it as a dependency and keep you
 ## Features
 
 - Markdown posts (`src/content/blog/`)
-- Home, study, scraps, about, domains, 404, RSS, sitemap
+- Home, study, scraps, about, 404, RSS, sitemap
 - Light / dark mode
 - One config file: `lonefox.config.ts`
 - Photos and fox marks via config; empty photo paths keep a paper frame
@@ -59,7 +59,6 @@ Edit [`lonefox.config.ts`](lonefox.config.ts):
 | `scraps.photo` | scraps masthead photo (empty = paper frame) |
 | `archive` | study labels (technical writing) |
 | `scraps` | poems, walks, and notes |
-| `domains` | optional trade list (empty = unused; linked from about) |
 
 Put photos and custom marks in the site `public/` directory and point the config at those URLs. Do not patch theme source files.
 
