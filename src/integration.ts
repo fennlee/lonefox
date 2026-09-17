@@ -18,6 +18,16 @@ export default function lonefox(): AstroIntegration {
         const root = fileURLToPath(config.root);
         const configFile = path.join(root, 'lonefox.config.ts');
         updateConfig({
+          markdown: {
+            shikiConfig: {
+              themes: {
+                light: 'github-light',
+                dark: 'github-dark',
+              },
+              defaultColor: false,
+              wrap: false,
+            },
+          },
           vite: {
             plugins: [
               {

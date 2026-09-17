@@ -4,6 +4,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versioning: [S
 
 ## [Unreleased]
 
+### Changed
+
+- Article reading: larger body, clearer heading steps, paper-toned Shiki (light/dark), tables and captions, no fake CJK italic.
+
 ### Removed
 
 - Domains page, `domains` config, and the about-page link. Sale lists are not part of the theme.
