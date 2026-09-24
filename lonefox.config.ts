@@ -1,25 +1,19 @@
-/**
- * lonefox — site identity and copy.
- * Posts live in src/content/blog/. Colors live in src/styles/global.css.
- */
 export type Tone = 'ember' | 'indigo' | 'glow';
 
 export const site = {
   name: 'lonefox',
   wordmark: 'lonefox',
   motto: 'a quiet place on the web.',
-  description: 'A personal webhome. White paper, one ember.',
+  description: 'A minimal Astro blog theme.',
   url: 'https://example.com',
   lang: 'en',
   author: 'your name',
   email: 'you@example.com',
-  github: 'https://github.com/prust/lonefox',
+  github: 'https://github.com/fennlee/lonefox',
   ogImage: '/images/share.png',
   favicon: '/favicon.svg',
   themeKey: 'lonefox-theme',
   rssTitle: '',
-  // Optional. Empty = built-in fox marks. Paths are site-root public URLs.
-  // marks: { wordmark: '/marks/wordmark.svg', sleeping: '/marks/sleeping.svg', paw: '/marks/paw.svg' },
 };
 
 export const nav = [
@@ -45,7 +39,7 @@ export const home = {
     ],
     note: 'lonefox · somewhere',
   },
-  portrait: { src: '', alt: '' }, // empty src = paper frame, same size
+  portrait: { src: '', alt: '' },
   themes: {
     label: 'traces along the road',
     tags: [

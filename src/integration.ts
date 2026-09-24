@@ -4,7 +4,6 @@ import { fileURLToPath } from 'node:url';
 
 const themeSrc = fileURLToPath(new URL('./', import.meta.url));
 
-/** Theme `src/` as a path relative to the site root. Pass to `srcDir`. */
 export function lonefoxSrc(root: string = process.cwd()): string {
   const rel = path.relative(root, themeSrc);
   return rel || './src';

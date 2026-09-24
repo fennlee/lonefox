@@ -6,7 +6,7 @@
 
 ![首页](docs/screenshot.png)
 
-可直接当 GitHub 模板使用，或作为依赖，在站点根目录放自己的 `lonefox.config.ts`。
+可以直接克隆当模板，或作为依赖安装，在站点根目录放自己的 `lonefox.config.ts`。
 
 ## 特性
 
@@ -19,7 +19,7 @@
 ## 快速开始
 
 ```bash
-git clone https://github.com/hareai/lonefox.git
+git clone https://github.com/fennlee/lonefox.git
 cd lonefox
 npm install
 npm run dev
@@ -27,21 +27,36 @@ npm run dev
 
 需要 Node 22+。
 
+## 作为依赖
+
+```json
+{
+  "dependencies": {
+    "lonefox": "github:fennlee/lonefox"
+  }
+}
+```
+
+在 `astro.config` 里从 `lonefox`（或 `lonefox/src`）引入。站点根目录放 `lonefox.config.ts`，主题以 `lonefox/config` 读取。文章写在站点自己的 `src/content/blog/`，照片放在站点自己的 `public/`。
+
 ## 目录
 
 ```text
 /
-├── lonefox.config.ts     # 站点、首页、关于、归档
+├── lonefox.config.ts
 ├── src/
-│   ├── content/blog/     # 文章
+│   ├── content/blog/
 │   ├── pages/
 │   ├── layouts/
 │   ├── components/
-│   └── styles/global.css # 颜色
+│   ├── lib/
+│   └── styles/global.css
 └── public/
 ```
 
 文章字段：`title`、`date`、`description`、`category`（`tech` | `notes` | `travel` | `poem`），可选 `location`、`cover`、`images`。
+
+`tech` 进 `/study/`，其余进 `/scraps/`。`/archive/` 会跳到 `/study/`。
 
 ## 配置
 
@@ -54,13 +69,13 @@ npm run dev
 | `nav` | 导航 |
 | `home` | 首页文案 |
 | `home.portrait` | 首页照片（`src` 空则同尺寸纸框） |
-| `about.photo` | 关于页照片（空则纸框） |
-| `archive.photo` | 书房页头照片（空则纸框） |
-| `scraps.photo` | 纸条页头照片（空则纸框） |
-| `archive` | 书房标签（技术文） |
+| `about.photo` | 关于页照片 |
+| `archive.photo` | 书房页头照片 |
+| `scraps.photo` | 纸条页头照片 |
+| `archive` | 书房标签 |
 | `scraps` | 诗、出行、杂记 |
 
-照片和自定义标记放站点 `public/`，配置里写路径。不要改主题源码。
+照片和自定义标记放站点 `public/`，配置里写路径。不要改主题源码来换站点样子。
 
 颜色在 `src/styles/global.css`。
 
