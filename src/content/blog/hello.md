@@ -1,10 +1,8 @@
 ---
-title: Hello from the den
+title: Hello
 date: 2026-09-04
-description: The first note on the shelves.
+description: A sample note.
 category: notes
 ---
 
-This starter is a webhome, not a blog theme.
-
-Edit `lonefox.config.ts`. Put writing in `src/content/blog/`. Leave the rooms where they are.
+This is a sample post. Edit `lonefox.config.ts` and add Markdown files in `src/content/blog/`.

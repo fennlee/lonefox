@@ -6,38 +6,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versioning: [S
 
 ### Changed
 
-- Article reading: larger body, clearer heading steps, paper-toned Shiki (light/dark), tables and captions, no fake CJK italic.
+- README clone URLs point at `fennlee/lonefox`.
+- Sample post and default `site.description` no longer call this a webhome.
+- `@font-face` rules that pointed at missing files were removed. System fonts still apply.
 
 ### Removed
 
-- Domains page, `domains` config, and the about-page link. Sale lists are not part of the theme.
+- Unused `badge` field on posts.
 
 ### Added
 
-- `site.marks` (`wordmark`, `sleeping`, `paw`) to swap the fox drawings via config. Empty uses the built-in SVG.
-- Empty portrait / about / study / scraps photos keep the same paper frame (no “portrait” placeholder).
-- README screenshot: the hare home page.
-- `/scraps/` for poems, walks, and notes. Same ledger as the study, with a kind mark on each row. The study lives at `/study/`.
-- `site.years` in config for the footer range (default: current year).
-
-### Changed
-
-- Article `.prose` uses the serif chain (Alegreya / WenKai) instead of inheriting Arial from `body`.
-- `/archive/` redirects to `/study/`. Post permalinks split: technical notes under `/study/…`, everything else under `/scraps/…`.
-- RSS: `/rss.xml` is the whole den; `/study/rss.xml` and `/scraps/rss.xml` are the rooms.
-- Archive drawers are the workbench only. Notes, poems, and walks live in scraps.
-- README (en + zh): describe lonefox as an Astro blog theme.
-
-### Fixed
-
-- `lonefoxSrc()` returns a path string for the consuming site's `srcDir`; the integration maps `lonefox/config` to the site-root config file.
-
-### Added
-
-- `site.favicon` in config (default `/favicon.svg`).
-
-- `lonefox` Astro integration: `lonefox/config` reads `lonefox.config.ts` from the site root, so another repo can depend on this theme.
-
-- Domains page, poem/travel posts, portraits, and the live visual CSS so a site can match mygo.top.
-
-- Initial lonefox Astro blog theme.
+- GitHub Actions CI: `astro check` then `build` on `main`.
